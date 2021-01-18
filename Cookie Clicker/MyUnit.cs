@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Cookie_Clicker
 {
@@ -24,6 +25,7 @@ namespace Cookie_Clicker
 
         private void PrepareView()
         {
+          
             unitView.DataSource = (from entry in _shopForm.UnitDictionary
                 orderby entry.Key
                 select new { entry.Key, entry.Value.countOfUnit, entry.Value.damageDealt, entry.Value.type, entry.Value.price }).ToList();

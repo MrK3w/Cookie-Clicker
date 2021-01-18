@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Cookie_Clicker
@@ -9,15 +11,12 @@ namespace Cookie_Clicker
         /// <summary>
         /// Defining a dictionary for saving a units
         /// </summary>
-        public Dictionary<string, Unit> UnitDictionary = new Dictionary<string, Unit> 
-        {
-            { "basic unit", new Unit(0,TypeOfUnit.MeleePower,10,1) },
-            { "intermediate unit", new Unit(0,TypeOfUnit.MagicalPower,1000,10) },
-        };
+        public Dictionary<string, Unit> UnitDictionary;
 
         public ShopForm()
         {
             InitializeComponent();
+            InitiateDictionary();
         }
         /// <summary>
         /// Every second count your passive points
@@ -26,10 +25,17 @@ namespace Cookie_Clicker
         public int ReturnUnits()
         {
             int sum = 0;
-            foreach (var unit in UnitDictionary)
+            foreach (KeyValuePair<string, Unit> unit in UnitDictionary)
             {
-                if (unit.Key == "basic unit") sum += unit.Value.countOfUnit * unit.Value.damageDealt;
-                if (unit.Key == "intermediate unit") sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                if (unit.Key == "basic unit")
+                {
+                    sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                }
+
+                if (unit.Key == "intermediate unit")
+                {
+                    sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                }
             }
 
             return sum;
@@ -68,6 +74,24 @@ namespace Cookie_Clicker
             else
             {
                 MessageBox.Show("You don't have enough clicks!");
+            }
+        }
+
+        private void InitiateDictionary()
+        {
+            if (File.Exists("MyUnits.txt"))
+            {
+                StreamReader reader = new StreamReader("MyUnits.txt");
+                string text = reader.ReadLine();
+                UnitDictionary = JsonConvert.DeserializeObject<Dictionary<string, Unit>>(text);
+                reader.Close();
+            }
+            else{
+                UnitDictionary = new Dictionary<string, Unit>
+                {
+                    { "basic unit", new Unit(0,TypeOfUnit.MeleePower,10,1) },
+                    { "intermediate unit", new Unit(0,TypeOfUnit.MagicalPower,1000,10) },
+                };
             }
         }
     }

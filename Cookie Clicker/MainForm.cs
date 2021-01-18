@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.IO;
-using System.Xml;
-using System.Runtime.Serialization;
-using System.Xml.Linq;
 using System.Numerics;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
 
 namespace Cookie_Clicker
 {
@@ -79,5 +73,15 @@ namespace Cookie_Clicker
             MyUnit form = new MyUnit(_shopForm);
             form.ShowDialog();
         }
+
+        private void Cookie_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string output = JsonConvert.SerializeObject(_shopForm.UnitDictionary);
+            StreamWriter writer = new StreamWriter("MyUnits.txt");
+            writer.WriteLine(output);
+            writer.Close();
+
+        }
+
     }
 }

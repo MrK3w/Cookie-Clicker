@@ -34,10 +34,10 @@ namespace Cookie_Clicker
         {
             this.components = new System.ComponentModel.Container();
             this.ImagePanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.shopButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.ScoreTimer = new System.Windows.Forms.Timer(this.components);
             this.ImagePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -47,6 +47,7 @@ namespace Cookie_Clicker
             // 
             this.ImagePanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Controls.Add(this.button1);
             this.ImagePanel.Controls.Add(this.shopButton);
             this.ImagePanel.Controls.Add(this.label1);
             this.ImagePanel.Controls.Add(this.pictureBox);
@@ -55,6 +56,16 @@ namespace Cookie_Clicker
             this.ImagePanel.Size = new System.Drawing.Size(971, 511);
             this.ImagePanel.TabIndex = 0;
             this.ImagePanel.TabStop = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(648, 189);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 90);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "SHOW UNITS";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // shopButton
             // 
@@ -91,16 +102,6 @@ namespace Cookie_Clicker
             this.pictureBox.TabStop = false;
             this.pictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(33, 393);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 90);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Show units";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // ScoreTimer
             // 
             this.ScoreTimer.Enabled = true;
@@ -112,11 +113,11 @@ namespace Cookie_Clicker
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 577);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.ImagePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Cookie";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Cookie_FormClosed);
             this.ImagePanel.ResumeLayout(false);
             this.ImagePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
