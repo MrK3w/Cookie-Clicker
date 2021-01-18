@@ -13,12 +13,13 @@ using System.IO;
 using System.Xml;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
+using System.Numerics;
 
 namespace Cookie_Clicker
 {
     public partial class Cookie : Form
     {
-        public static int Count;
+        public static BigInteger Count = 999999999999;
         private readonly ShopForm _shopForm;
 
         public Cookie()
@@ -26,33 +27,19 @@ namespace Cookie_Clicker
             InitializeComponent();
           
             _shopForm = new ShopForm();
-            unitView.BackgroundColor = SystemColors.Control;
-
-            RefreshDataGrid();
             RefreshValue();
 
             pictureBox.Image = Image.FromFile(ConfigurationManager.AppSettings["ImagePath"]);
    
         }
 
-        /// <summary>
-        /// Store units into data grid
-        /// </summary>
-        private void RefreshDataGrid()
-        {
-                unitView.DataSource = (from entry in _shopForm.UnitDictionary
-                orderby entry.Key
-                select new { entry.Key, entry.Value }).ToList();
-                unitView.Columns[0].HeaderText = "Unit";
-                unitView.Columns[1].HeaderText = "Count";
-        }
 
         /// <summary>
         /// Refresh button label
         /// </summary>
         private void RefreshValue()
         {
-            label1.Text = "Points: " + Count;
+            label1.Text = "Points: " + BigIntegerFormatter.FormatWithSuffix(Count);
         }
 
         /// <summary>
@@ -74,7 +61,6 @@ namespace Cookie_Clicker
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
             Count +=  _shopForm.ReturnUnits();
-            RefreshDataGrid();
             RefreshValue();
         }
 
@@ -83,9 +69,15 @@ namespace Cookie_Clicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ShoppingFomrButtonClick(object sender, EventArgs e)
+        private void ShoppingFormButtonClick(object sender, EventArgs e)
         {
             _shopForm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MyUnit form = new MyUnit(_shopForm);
+            form.ShowDialog();
         }
     }
 }

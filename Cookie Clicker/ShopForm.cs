@@ -9,10 +9,10 @@ namespace Cookie_Clicker
         /// <summary>
         /// Defining a dictionary for saving a units
         /// </summary>
-        public Dictionary<string, int> UnitDictionary = new Dictionary<string, int> 
+        public Dictionary<string, Unit> UnitDictionary = new Dictionary<string, Unit> 
         {
-            { "basic unit", 0 },
-            { "intermediate unit", 0 },
+            { "basic unit", new Unit(0,TypeOfUnit.MeleePower,10,1) },
+            { "intermediate unit", new Unit(0,TypeOfUnit.MagicalPower,1000,10) },
         };
 
         public ShopForm()
@@ -28,8 +28,8 @@ namespace Cookie_Clicker
             int sum = 0;
             foreach (var unit in UnitDictionary)
             {
-                if (unit.Key == "basic unit") sum += unit.Value * 1;
-                if (unit.Key == "intermediate unit") sum += unit.Value * 100;
+                if (unit.Key == "basic unit") sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                if (unit.Key == "intermediate unit") sum += unit.Value.countOfUnit * unit.Value.damageDealt;
             }
 
             return sum;
@@ -42,10 +42,10 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void basicUnit_Click(object sender, EventArgs e)
         {
-            if(Cookie.Count >= 10)
+            if(Cookie.Count >= UnitDictionary["basic unit"].price)
             {
-                UnitDictionary["basic unit"] += 1;
-                Cookie.Count -= 10;
+                UnitDictionary["basic unit"].countOfUnit += 1;
+                Cookie.Count -= UnitDictionary["basic unit"].price;
             }
             else
             {
@@ -60,10 +60,10 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Cookie.Count >= 100)
+            if (Cookie.Count >= UnitDictionary["intermediate unit"].price)
             {
-                UnitDictionary["intermediate unit"] += 1;
-                Cookie.Count -= 100;
+                UnitDictionary["intermediate unit"].countOfUnit += 1;
+                Cookie.Count -= UnitDictionary["intermediate unit"].price;
             }
             else
             {
