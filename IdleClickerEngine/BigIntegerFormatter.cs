@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace Cookie_Clicker
+namespace IdleClickerEngine
 {
     public class BigIntegerFormatter
     {
-        private static List<string> suffixes = new List<string>();
+        private static List<string> _suffixes = new List<string>();
 
         /// <summary>
         /// If it's equal to 0, there are only suffixes from an empty string to Q on the suffixes list.
         /// If it's equal to 1, there are a - z suffixes added.
         /// If it's equal to 2, there are aa - zz suffixes added and so on.
         /// </summary>
-        private static int suffixesCounterForGeneration = 0;
+        private static int _suffixesCounterForGeneration = 0;
 
 
         /// <summary>
@@ -86,18 +86,18 @@ namespace Cookie_Clicker
         private static string GetSuffixForNumber(int suffixIndex)
         {
             // Creates initial suffixes List with an empty string, k, M, B and Q
-            if (suffixes.Count == 0)
+            if (_suffixes.Count == 0)
             {
-                suffixes = CreateSuffixesList();
+                _suffixes = CreateSuffixesList();
             }
 
             // Fills the suffixes list if there's a need to
-            if (suffixes.Count - 1 < suffixIndex)
+            if (_suffixes.Count - 1 < suffixIndex)
             {
-                FillSuffixesList(suffixes, suffixIndex);
+                FillSuffixesList(_suffixes, suffixIndex);
             }
 
-            return suffixes[suffixIndex];
+            return _suffixes[suffixIndex];
         }
 
         private static List<string> CreateSuffixesList()
@@ -121,7 +121,7 @@ namespace Cookie_Clicker
             {
                 // happens only once, when suffixList is filled only with 
                 // initial values
-                if (suffixesCounterForGeneration == 0)
+                if (_suffixesCounterForGeneration == 0)
                 {
                     for (int i = 97; i <= 122; i++)
                     {
@@ -136,7 +136,7 @@ namespace Cookie_Clicker
                         suffixesList.Add(char.ToString(character));
                     }
 
-                    suffixesCounterForGeneration++;
+                    _suffixesCounterForGeneration++;
                 }
                 else
                 {
@@ -152,7 +152,7 @@ namespace Cookie_Clicker
                         // counts how many times one character should be used as one suffix and adds them
                         // basing on the suffixesCounterForGeneration which is the number telling us how many times 
                         // the suffixes were generated
-                        for (int counter = 1; counter <= suffixesCounterForGeneration + 1; counter++)
+                        for (int counter = 1; counter <= _suffixesCounterForGeneration + 1; counter++)
                         {
                             generatedSuffix += character.ToString();
                         }
@@ -161,7 +161,7 @@ namespace Cookie_Clicker
                         suffixesList.Add(generatedSuffix);
                     }
 
-                    suffixesCounterForGeneration++;
+                    _suffixesCounterForGeneration++;
                 }
             }
         }

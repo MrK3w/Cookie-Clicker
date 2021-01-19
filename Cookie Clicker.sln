@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookie Clicker", "Cookie Clicker\Cookie Clicker.csproj", "{D5251C09-924E-49C9-8AE3-C59534FA97EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieClicker", "Cookie Clicker\CookieClicker.csproj", "{D5251C09-924E-49C9-8AE3-C59534FA97EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleClickerEngine", "IdleClickerEngine\IdleClickerEngine.csproj", "{BED0284E-96B0-42E4-AF1F-44CF09BF9D8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D5251C09-924E-49C9-8AE3-C59534FA97EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5251C09-924E-49C9-8AE3-C59534FA97EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5251C09-924E-49C9-8AE3-C59534FA97EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED0284E-96B0-42E4-AF1F-44CF09BF9D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED0284E-96B0-42E4-AF1F-44CF09BF9D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED0284E-96B0-42E4-AF1F-44CF09BF9D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED0284E-96B0-42E4-AF1F-44CF09BF9D8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

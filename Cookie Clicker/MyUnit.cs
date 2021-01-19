@@ -28,7 +28,7 @@ namespace Cookie_Clicker
           
             unitView.DataSource = (from entry in _shopForm.UnitDictionary
                 orderby entry.Key
-                select new { entry.Key, entry.Value.countOfUnit, entry.Value.damageDealt, entry.Value.type, entry.Value.price }).ToList();
+                select new { entry.Key, countOfUnit = entry.Value.CountOfUnit, damageDealt = entry.Value.DamageDealt, type = entry.Value.Type, price = entry.Value.Price }).ToList();
             unitView.Columns[0].HeaderText = "Unit name";
             unitView.Columns[1].HeaderText = "Count of unit";
             unitView.Columns[2].HeaderText = "damage of unit";

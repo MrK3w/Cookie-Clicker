@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
+using IdleClickerEngine;
 
 namespace Cookie_Clicker
 {
@@ -19,7 +20,7 @@ namespace Cookie_Clicker
         private readonly int _monsterHealth, rewardForKillingMonster = 1;
 
         //Total coins you have
-        public static int Coins;
+        public static int Coins = 100000;
 
         //Your click damage
         private int _clickDamage = 1;

@@ -73,10 +73,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigIntegerFormatter.cs" />
-    <Compile Include="FileWorker.cs" />
-    <Compile Include="HealthBar.cs" />
-    <Compile Include="Images.cs" />
     <Compile Include="MyUnit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +93,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit.cs" />
     <EmbeddedResource Include="Cookie.resx">
       <DependentUpon>Cookie.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IdleClickerEngine\IdleClickerEngine.csproj">
+      <Project>{bed0284e-96b0-42e4-af1f-44cf09bf9d8f}</Project>
+      <Name>IdleClickerEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using IdleClickerEngine;
 
 namespace Cookie_Clicker
 {
@@ -30,12 +31,12 @@ namespace Cookie_Clicker
             {
                 if (unit.Key == "basic unit")
                 {
-                    sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                    sum += unit.Value.CountOfUnit * unit.Value.DamageDealt;
                 }
 
                 if (unit.Key == "intermediate unit")
                 {
-                    sum += unit.Value.countOfUnit * unit.Value.damageDealt;
+                    sum += unit.Value.CountOfUnit * unit.Value.DamageDealt;
                 }
             }
 
@@ -49,10 +50,10 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void basicUnit_Click(object sender, EventArgs e)
         {
-            if(CookieForm.Coins >= UnitDictionary["basic unit"].price)
+            if(CookieForm.Coins >= UnitDictionary["basic unit"].Price)
             {
-                UnitDictionary["basic unit"].countOfUnit += 1;
-                CookieForm.Coins -= UnitDictionary["basic unit"].price;
+                UnitDictionary["basic unit"].CountOfUnit += 1;
+                CookieForm.Coins -= UnitDictionary["basic unit"].Price;
             }
             else
             {
@@ -68,10 +69,10 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void intermediateUnit_Click(object sender, EventArgs e)
         {
-            if (CookieForm.Coins >= UnitDictionary["intermediate unit"].price)
+            if (CookieForm.Coins >= UnitDictionary["intermediate unit"].Price)
             {
-                UnitDictionary["intermediate unit"].countOfUnit += 1;
-                CookieForm.Coins -= UnitDictionary["intermediate unit"].price;
+                UnitDictionary["intermediate unit"].CountOfUnit += 1;
+                CookieForm.Coins -= UnitDictionary["intermediate unit"].Price;
             }
             else
             {
