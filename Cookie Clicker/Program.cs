@@ -16,7 +16,7 @@ namespace Cookie_Clicker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Cookie());
+            Application.Run(new CookieForm(100));
         }
     }
 }

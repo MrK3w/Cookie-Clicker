@@ -71,7 +71,7 @@ namespace Cookie_Clicker
             this.SecondUnitButton.TabIndex = 3;
             this.SecondUnitButton.Text = "Add";
             this.SecondUnitButton.UseVisualStyleBackColor = true;
-            this.SecondUnitButton.Click += new System.EventHandler(this.button1_Click);
+            this.SecondUnitButton.Click += new System.EventHandler(this.intermediateUnit_Click);
             // 
             // ShopForm
             // 

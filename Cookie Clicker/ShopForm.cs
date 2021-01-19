@@ -11,18 +11,19 @@ namespace Cookie_Clicker
         /// <summary>
         /// Defining a dictionary for saving a units
         /// </summary>
-        public Dictionary<string, Unit> UnitDictionary;
+        public Dictionary<string, Unit> UnitDictionary { get; private set; }
 
         public ShopForm()
         {
             InitializeComponent();
-            InitiateDictionary();
+            InitiateDictionary("MyUnits.txt");
         }
+
         /// <summary>
         /// Every second count your passive points
         /// </summary>
         /// <returns></returns>
-        public int ReturnUnits()
+        public int GetDpsOfYourUnits()
         {
             int sum = 0;
             foreach (KeyValuePair<string, Unit> unit in UnitDictionary)
@@ -42,57 +43,72 @@ namespace Cookie_Clicker
         }
 
         /// <summary>
-        /// Add one basic unit
+        /// Add one basic unit and remove coins, which cost that unit.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void basicUnit_Click(object sender, EventArgs e)
         {
-            if(Cookie.Count >= UnitDictionary["basic unit"].price)
+            if(CookieForm.Coins >= UnitDictionary["basic unit"].price)
             {
                 UnitDictionary["basic unit"].countOfUnit += 1;
-                Cookie.Count -= UnitDictionary["basic unit"].price;
+                CookieForm.Coins -= UnitDictionary["basic unit"].price;
             }
             else
             {
-                MessageBox.Show("You don't have enough clicks!");
+                MessageBox.Show("You don't have enough coins!");
+            }
+        }
+
+
+        /// <summary>
+        /// Add one intermediate unit and remove coins, which cost that unit.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void intermediateUnit_Click(object sender, EventArgs e)
+        {
+            if (CookieForm.Coins >= UnitDictionary["intermediate unit"].price)
+            {
+                UnitDictionary["intermediate unit"].countOfUnit += 1;
+                CookieForm.Coins -= UnitDictionary["intermediate unit"].price;
+            }
+            else
+            {
+                MessageBox.Show("You don't have enough coins!");
+            }
+        }
+
+        //Prepare your dictionary on start of the program
+        private void InitiateDictionary(string path)
+        {
+            if (!File.Exists(path))
+            {
+                InitiateDictionaryWithoutFile();
+            }
+            else
+            {
+                InitiateDictionaryFromFile(path);
             }
         }
 
         /// <summary>
-        ///  Add one unit
+        /// Initiate dictionary from file
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void InitiateDictionaryWithoutFile()
         {
-            if (Cookie.Count >= UnitDictionary["intermediate unit"].price)
+            UnitDictionary = new Dictionary<string, Unit>
             {
-                UnitDictionary["intermediate unit"].countOfUnit += 1;
-                Cookie.Count -= UnitDictionary["intermediate unit"].price;
-            }
-            else
-            {
-                MessageBox.Show("You don't have enough clicks!");
-            }
+                {"basic unit", new Unit(0, TypeOfUnit.MeleePower, 10, 1)},
+                {"intermediate unit", new Unit(0, TypeOfUnit.MagicalPower, 100, 10)},
+            };
         }
 
-        private void InitiateDictionary()
+
+        private void InitiateDictionaryFromFile(string path)
         {
-            if (File.Exists("MyUnits.txt"))
-            {
-                StreamReader reader = new StreamReader("MyUnits.txt");
-                string text = reader.ReadLine();
-                UnitDictionary = JsonConvert.DeserializeObject<Dictionary<string, Unit>>(text);
-                reader.Close();
-            }
-            else{
-                UnitDictionary = new Dictionary<string, Unit>
-                {
-                    { "basic unit", new Unit(0,TypeOfUnit.MeleePower,10,1) },
-                    { "intermediate unit", new Unit(0,TypeOfUnit.MagicalPower,1000,10) },
-                };
-            }
+            FileWorker worker = new FileWorker(path);
+            UnitDictionary = worker.LoadUnits();
         }
     }
 }
