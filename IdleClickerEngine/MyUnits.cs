@@ -55,14 +55,14 @@ namespace IdleClickerEngine
 
         public static bool BuyIntermediateUnit()
         {
-            return BuyUnit("Intermediate unit");
+            return BuyUnit("intermediate unit");
         }
 
         private static bool BuyUnit(string nameOfUnit)
         {
             if (MyCoins.Coins >= UnitDictionary[nameOfUnit].Price)
             {
-                UnitDictionary["basic unit"].CountOfUnit += 1;
+                UnitDictionary[nameOfUnit].CountOfUnit += 1;
                 MyCoins.Coins -= UnitDictionary[nameOfUnit].Price;
                 return true;
             }

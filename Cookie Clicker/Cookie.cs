@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
@@ -62,7 +61,7 @@ namespace Cookie_Clicker
                 healthLabel.Text = $@"{_remainingHealth}/{_monsterHealth}";
             }
 
-            label1.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(CountDps)+"\n"+
+            YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(CountDps)+"\n"+
                           "Coins: " + MyCoins.Coins;
             Refresh();
         }
@@ -147,6 +146,12 @@ namespace Cookie_Clicker
             MyCoins.Coins += rewardForKillingMonster;
             LoadImage();
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BossEntry firstBoss = new BossEntry(4,10000);
+            firstBoss.ShowDialog();
         }
 
         /// <summary>

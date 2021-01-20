@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigIntegerFormatter.cs" />
+    <Compile Include="Boss.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="HealthBar.cs" />
     <Compile Include="Images.cs" />

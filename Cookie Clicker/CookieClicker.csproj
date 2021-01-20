@@ -73,6 +73,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BossEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BossEntry.Designer.cs">
+      <DependentUpon>BossEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableOfMyUnits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BossEntry.resx">
+      <DependentUpon>BossEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cookie.resx">
       <DependentUpon>Cookie.cs</DependentUpon>
     </EmbeddedResource>

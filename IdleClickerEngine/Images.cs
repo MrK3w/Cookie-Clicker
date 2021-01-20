@@ -4,12 +4,12 @@ namespace IdleClickerEngine
 {
     public class Images
     {
-        private string[] images = {"FirstImage", "SecondImage", "ThirdImage", "FourthImage", "FifthImage"};
+        private readonly string[] _images = {"FirstImage", "SecondImage", "ThirdImage", "FourthImage","FifthImage"};
         public string GetImage()
         {
             Random rng = new Random();
             int i = rng.Next(0, 5);
-            return images[i];
+            return _images[i];
         }
     }
 }
