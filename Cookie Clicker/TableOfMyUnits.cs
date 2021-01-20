@@ -7,18 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IdleClickerEngine;
 using Newtonsoft.Json;
 
 namespace Cookie_Clicker
 {
-    public partial class MyUnit : Form
+    public partial class TableOfMyUnits : Form
     {
-        private ShopForm _shopForm;
-        public MyUnit(ShopForm _shop)
+        public TableOfMyUnits()
         {
             InitializeComponent();
             unitView.BackgroundColor = SystemColors.Control;
-            _shopForm = _shop;
             PrepareView();
            
         }
@@ -26,7 +25,7 @@ namespace Cookie_Clicker
         private void PrepareView()
         {
           
-            unitView.DataSource = (from entry in _shopForm.UnitDictionary
+            unitView.DataSource = (from entry in MyUnits.UnitDictionary
                 orderby entry.Key
                 select new { entry.Key, countOfUnit = entry.Value.CountOfUnit, damageDealt = entry.Value.DamageDealt, type = entry.Value.Type, price = entry.Value.Price }).ToList();
             unitView.Columns[0].HeaderText = "Unit name";

@@ -8,39 +8,11 @@ using IdleClickerEngine;
 namespace Cookie_Clicker
 {
     public partial class ShopForm : Form
-    {
-        /// <summary>
-        /// Defining a dictionary for saving a units
-        /// </summary>
-        public Dictionary<string, Unit> UnitDictionary { get; private set; }
-
+    { 
         public ShopForm()
         {
             InitializeComponent();
-            InitiateDictionary("MyUnits.txt");
-        }
-
-        /// <summary>
-        /// Every second count your passive points
-        /// </summary>
-        /// <returns></returns>
-        public int GetDpsOfYourUnits()
-        {
-            int sum = 0;
-            foreach (KeyValuePair<string, Unit> unit in UnitDictionary)
-            {
-                if (unit.Key == "basic unit")
-                {
-                    sum += unit.Value.CountOfUnit * unit.Value.DamageDealt;
-                }
-
-                if (unit.Key == "intermediate unit")
-                {
-                    sum += unit.Value.CountOfUnit * unit.Value.DamageDealt;
-                }
-            }
-
-            return sum;
+       
         }
 
         /// <summary>
@@ -50,15 +22,7 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void basicUnit_Click(object sender, EventArgs e)
         {
-            if(CookieForm.Coins >= UnitDictionary["basic unit"].Price)
-            {
-                UnitDictionary["basic unit"].CountOfUnit += 1;
-                CookieForm.Coins -= UnitDictionary["basic unit"].Price;
-            }
-            else
-            {
-                MessageBox.Show("You don't have enough coins!");
-            }
+            if (!MyUnits.BuyBasicUnit()) MessageBox.Show("You don't have enough coins!");
         }
 
 
@@ -67,49 +31,10 @@ namespace Cookie_Clicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void intermediateUnit_Click(object sender, EventArgs e)
+        private void IntermediateUnit_Click(object sender, EventArgs e)
         {
-            if (CookieForm.Coins >= UnitDictionary["intermediate unit"].Price)
-            {
-                UnitDictionary["intermediate unit"].CountOfUnit += 1;
-                CookieForm.Coins -= UnitDictionary["intermediate unit"].Price;
-            }
-            else
-            {
-                MessageBox.Show("You don't have enough coins!");
-            }
+            if (!MyUnits.BuyIntermediateUnit()) MessageBox.Show("You don't have enough coins!");
         }
 
-        //Prepare your dictionary on start of the program
-        private void InitiateDictionary(string path)
-        {
-            if (!File.Exists(path))
-            {
-                InitiateDictionaryWithoutFile();
-            }
-            else
-            {
-                InitiateDictionaryFromFile(path);
-            }
-        }
-
-        /// <summary>
-        /// Initiate dictionary from file
-        /// </summary>
-        private void InitiateDictionaryWithoutFile()
-        {
-            UnitDictionary = new Dictionary<string, Unit>
-            {
-                {"basic unit", new Unit(0, TypeOfUnit.MeleePower, 10, 1)},
-                {"intermediate unit", new Unit(0, TypeOfUnit.MagicalPower, 100, 10)},
-            };
-        }
-
-
-        private void InitiateDictionaryFromFile(string path)
-        {
-            FileWorker worker = new FileWorker(path);
-            UnitDictionary = worker.LoadUnits();
-        }
     }
 }

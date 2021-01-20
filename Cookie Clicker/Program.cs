@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IdleClickerEngine;
 
 namespace Cookie_Clicker
 {
@@ -14,6 +15,7 @@ namespace Cookie_Clicker
         [STAThread]
         static void Main()
         {
+            MyUnits.InitiateDictionary("MyUnits.txt");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new CookieForm(100));

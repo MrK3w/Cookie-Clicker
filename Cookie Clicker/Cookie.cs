@@ -19,9 +19,6 @@ namespace Cookie_Clicker
 
         private readonly int _monsterHealth, rewardForKillingMonster = 1;
 
-        //Total coins you have
-        public static int Coins = 100000;
-
         //Your click damage
         private int _clickDamage = 1;
 
@@ -66,7 +63,7 @@ namespace Cookie_Clicker
             }
 
             label1.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(CountDps)+"\n"+
-                          "Coins: " + Coins;
+                          "Coins: " + MyCoins.Coins;
             Refresh();
         }
 
@@ -98,7 +95,7 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
-            CountDps =  _shop.GetDpsOfYourUnits();
+            CountDps = MyUnits.GetDpsOfYourUnits();
             AttackMonster(CountDps);
             IsMonsterStillAlive();
             RefreshValues();
@@ -121,8 +118,8 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void MyUnitFormClickOpen(object sender, EventArgs e)
         {
-            MyUnit unit = new MyUnit(_shop);
-            unit.ShowDialog();
+            TableOfMyUnits units = new TableOfMyUnits();
+            units.ShowDialog();
         }
 
         /// <summary>
@@ -132,9 +129,8 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void Cookie_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Dictionary<string, Unit> dictionary = _shop.UnitDictionary;
             FileWorker worker = new FileWorker("MyUnits.txt");
-            worker.SaveUnits(dictionary);
+            worker.SaveUnits();
         }
 
         /// <summary>
@@ -148,7 +144,7 @@ namespace Cookie_Clicker
             }
 
             _remainingHealth = _monsterHealth;
-            Coins += rewardForKillingMonster;
+            MyCoins.Coins += rewardForKillingMonster;
             LoadImage();
 
         }

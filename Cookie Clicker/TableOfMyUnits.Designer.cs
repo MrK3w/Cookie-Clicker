@@ -1,7 +1,7 @@
 ﻿
 namespace Cookie_Clicker
 {
-    partial class MyUnit
+    partial class TableOfMyUnits
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,7 @@ namespace Cookie_Clicker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.unitView);
-            this.Name = "MyUnit";
+            this.Name = "TableOfMyUnits";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.unitView)).EndInit();
             this.ResumeLayout(false);

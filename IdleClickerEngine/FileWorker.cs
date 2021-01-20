@@ -12,9 +12,9 @@ namespace IdleClickerEngine
             _path = path;
         }
 
-        public void SaveUnits(Dictionary<string,Unit> dictionary)
+        public void SaveUnits()
         {
-            string output = JsonConvert.SerializeObject(dictionary);
+            string output = JsonConvert.SerializeObject(MyUnits.UnitDictionary);
             StreamWriter writer = new StreamWriter(_path);
             writer.WriteLine(output);
             writer.Close();
