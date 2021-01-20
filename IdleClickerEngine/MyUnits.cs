@@ -60,10 +60,10 @@ namespace IdleClickerEngine
 
         private static bool BuyUnit(string nameOfUnit)
         {
-            if (MyCoins.Coins >= UnitDictionary[nameOfUnit].Price)
+            if (MyInfo.Coins >= UnitDictionary[nameOfUnit].Price)
             {
                 UnitDictionary[nameOfUnit].CountOfUnit += 1;
-                MyCoins.Coins -= UnitDictionary[nameOfUnit].Price;
+                MyInfo.Coins -= UnitDictionary[nameOfUnit].Price;
                 return true;
             }
 
@@ -81,7 +81,7 @@ namespace IdleClickerEngine
             UnitDictionary = new Dictionary<string, Unit>
             {
                 {"basic unit", new Unit(0, TypeOfUnit.MeleePower, 10, 1)},
-                {"intermediate unit", new Unit(0, TypeOfUnit.MagicalPower, 100, 10)},
+                {"intermediate unit", new Unit(0, TypeOfUnit.MagicalPower, 100, 1000000)},
             };
         }
 

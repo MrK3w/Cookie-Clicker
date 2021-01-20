@@ -14,21 +14,33 @@ namespace Cookie_Clicker
 {
     public partial class BossEntry : Form
     {
+        private readonly int _levelOfBoss, _bossHp;
+        private string _image;
         public BossEntry(int levelOfBoss, int bossHp)
         {
+            _levelOfBoss = levelOfBoss;
+            _bossHp = bossHp;
             InitializeComponent();
-            SettingOfForm(levelOfBoss, bossHp);
+            SettingOfForm();
         }
 
-        private void SettingOfForm(int levelOfBoss, int bossHp)
+        private void SettingOfForm()
         {
             Boss newBoss = new Boss();
-            newBoss.GetBossInformation(levelOfBoss, out string image, out string bossName, out string bossText);
+            newBoss.GetBossInformation(_levelOfBoss, out string image, out string bossName, out string bossText);
+            _image = image;
             pictureBox.Image = Image.FromFile(ConfigurationManager.AppSettings[image]);
             labelBossName.Text = bossName;
             labelTextOfBoss.Text = bossText;
-            labelBossHp.Text = $"{bossHp}HP";
+            labelBossHp.Text = $"{_bossHp}HP";
             Text = bossName;
+        }
+
+        private void BossOpen(object sender, EventArgs e)
+        {
+            BossFight fightBoss = new BossFight( _bossHp, _image);
+            Hide();
+            fightBoss.ShowDialog();
         }
     }
 }

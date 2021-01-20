@@ -52,7 +52,7 @@
     <Compile Include="FileWorker.cs" />
     <Compile Include="HealthBar.cs" />
     <Compile Include="Images.cs" />
-    <Compile Include="MyCoins.cs" />
+    <Compile Include="MyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeOfUnit.cs" />
     <Compile Include="Unit.cs" />

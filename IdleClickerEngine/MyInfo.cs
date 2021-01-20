@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace IdleClickerEngine
 {
-    public static class MyCoins
+    public static class MyInfo
     {
         //Total coins you have
         public static int Coins = 100000;
+        //Your click damage
+        public static int ClickDamage = 1;
+
+        public static int Level = 1;
+
     }
 }

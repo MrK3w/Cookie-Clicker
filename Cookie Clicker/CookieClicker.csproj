@@ -79,6 +79,18 @@
     <Compile Include="BossEntry.Designer.cs">
       <DependentUpon>BossEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="BossFight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BossFight.Designer.cs">
+      <DependentUpon>BossFight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="End.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="End.Designer.cs">
+      <DependentUpon>End.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableOfMyUnits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +116,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cookie.resx">
       <DependentUpon>Cookie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BossFight.resx">
+      <DependentUpon>BossFight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="End.resx">
+      <DependentUpon>End.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableOfMyUnits.resx">
       <DependentUpon>TableOfMyUnits.cs</DependentUpon>

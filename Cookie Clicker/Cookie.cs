@@ -9,27 +9,28 @@ namespace Cookie_Clicker
     public partial class CookieForm : Form
     {
         //Your passive dmg per second
-        public int CountDps;
+        private int _countDps;
         //instance of shop form
         private readonly ShopForm _shop;
 
         //remained hp of monster
         private int _remainingHealth;
 
-        private readonly int _monsterHealth, rewardForKillingMonster = 1;
+        private readonly int _monsterHealth, _rewardForKillingMonster;
 
-        //Your click damage
-        private int _clickDamage = 1;
-
+        
         private readonly HealthBar _healthBar 
             = new HealthBar(new Rectangle(245, 480, 405, 44));
 
-        public CookieForm(int monsterHealth)
+        public CookieForm(int monsterHealth, int rewardForKillingMonster)
         {
             InitializeComponent();
             _shop = new ShopForm();
-
+            if (MyInfo.Level == 5) TheEnd();
+            Floor.Text = $"Floor {MyInfo.Level}";
+            Text = $"Floor {MyInfo.Level}";
             _remainingHealth = monsterHealth;
+            _rewardForKillingMonster = rewardForKillingMonster;
             _monsterHealth = monsterHealth;
 
             Paint += OnPaint;
@@ -51,6 +52,12 @@ namespace Cookie_Clicker
             pictureBox.Image = Image.FromFile(ConfigurationManager.AppSettings[path]);
         }
 
+        private void TheEnd()
+        {
+            End end = new End();
+            end.ShowDialog();
+        }
+
         /// <summary>
         /// Refresh form and his values
         /// </summary>
@@ -61,8 +68,8 @@ namespace Cookie_Clicker
                 healthLabel.Text = $@"{_remainingHealth}/{_monsterHealth}";
             }
 
-            YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(CountDps)+"\n"+
-                          "Coins: " + MyCoins.Coins;
+            YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(_countDps)+"\n"+
+                          "Coins: " + MyInfo.Coins;
             Refresh();
         }
 
@@ -82,7 +89,7 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void ClickOnMonster(object sender, MouseEventArgs e)
         {
-            AttackMonster(_clickDamage);
+            AttackMonster(MyInfo.ClickDamage);
             IsMonsterStillAlive();
             RefreshValues();
         }
@@ -94,8 +101,8 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
-            CountDps = MyUnits.GetDpsOfYourUnits();
-            AttackMonster(CountDps);
+            _countDps = MyUnits.GetDpsOfYourUnits();
+            AttackMonster(_countDps);
             IsMonsterStillAlive();
             RefreshValues();
         }
@@ -143,14 +150,14 @@ namespace Cookie_Clicker
             }
 
             _remainingHealth = _monsterHealth;
-            MyCoins.Coins += rewardForKillingMonster;
+            MyInfo.Coins += _rewardForKillingMonster;
             LoadImage();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            BossEntry firstBoss = new BossEntry(4,10000);
+            BossEntry firstBoss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
             firstBoss.ShowDialog();
         }
 
