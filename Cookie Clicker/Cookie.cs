@@ -138,6 +138,7 @@ namespace Cookie_Clicker
         {
             FileWorker worker = new FileWorker("MyUnits.txt");
             worker.SaveUnits();
+            Application.Exit();
         }
 
         /// <summary>
