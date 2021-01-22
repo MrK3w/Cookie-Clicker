@@ -10,7 +10,7 @@ namespace IdleClickerEngine
     public static class MyInfo
     {
         //Total coins you have
-        public static BigInteger Coins = 100;
+        public static BigInteger Coins = 1000000;
         //Your click damage
         public static BigInteger ClickDamage = 1;
 

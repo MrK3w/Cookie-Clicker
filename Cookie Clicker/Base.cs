@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using IdleClickerEngine;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using IdleClickerEngine;
 
 namespace Cookie_Clicker
 {
     public partial class Base : Form
     {
+        /// <summary>
+        /// Hidden form, reason for this form is that you have to have opened base form when you want dispose opened forms
+        /// </summary>
         public Base()
         {
             
             InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.ShowInTaskbar = false;
-            this.Load += new EventHandler(Form1_Load);
+            FormBorderStyle = FormBorderStyle.None;
+            ShowInTaskbar = false;
+            Load += BaseFormLoad;
 
         }
 
@@ -30,9 +26,9 @@ namespace Cookie_Clicker
             newCookie.ShowDialog();
         }
 
-        void Form1_Load(object sender, EventArgs e)
+        private void BaseFormLoad(object sender, EventArgs e)
         {
-            this.Size = new Size(0, 0);
+            Size = new Size(0, 0);
         }
     }
 }

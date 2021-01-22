@@ -11,7 +11,7 @@ namespace Cookie_Clicker
     {
         private readonly BigInteger _bossHp;
         private readonly string _image;
-        private int _timer = 30;
+        private int _timer = 3;
         private BigInteger _countDps;
         private BigInteger _remainingHealth;
 

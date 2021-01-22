@@ -27,9 +27,9 @@ namespace Cookie_Clicker
         {
             InitializeComponent();
             _shop = new ShopForm();
+           
             if (MyInfo.Level == 6) TheEnd();
-            Floor.Text = $"Floor {MyInfo.Level}";
-            Text = $"Floor {MyInfo.Level}";
+
             _remainingHealth = monsterHealth;
             _rewardForKillingMonster = rewardForKillingMonster;
             _monsterHealth = monsterHealth;
@@ -39,8 +39,14 @@ namespace Cookie_Clicker
             RefreshValues();
             
             LoadImage();
-          
-        
+
+            InitializeFormInformations();
+        }
+
+        private void InitializeFormInformations()
+        {
+            Floor.Text = $"Floor {MyInfo.Level}";
+            Text = $"Floor {MyInfo.Level}";
         }
 
         /// <summary>
@@ -53,6 +59,9 @@ namespace Cookie_Clicker
             pictureBox.Image = Image.FromFile(ConfigurationManager.AppSettings[path]);
         }
 
+        /// <summary>
+        /// This form is opened when you finish the game
+        /// </summary>
         private void TheEnd()
         {
             End end = new End();
@@ -138,7 +147,6 @@ namespace Cookie_Clicker
         {
             FileWorker worker = new FileWorker("MyUnits.txt");
             worker.SaveUnits();
-            Application.Exit();
         }
 
         /// <summary>
@@ -157,12 +165,17 @@ namespace Cookie_Clicker
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Opening new form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenBossForm(object sender, EventArgs e)
         {
             BossEntry boss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
-            
-            boss.Show();
             Dispose();
+            boss.Show();
+            
 
         }
 
