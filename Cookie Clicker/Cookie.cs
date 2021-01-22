@@ -158,9 +158,11 @@ namespace Cookie_Clicker
 
         private void button2_Click(object sender, EventArgs e)
         {
-            BossEntry firstBoss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
-            Hide();
-            firstBoss.ShowDialog();
+            BossEntry boss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
+            
+            boss.Show();
+            Dispose();
+
         }
 
         /// <summary>

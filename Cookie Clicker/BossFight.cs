@@ -67,8 +67,8 @@ namespace Cookie_Clicker
                 Timer.Enabled = false;
                 MessageBox.Show("You Won");
                 MyInfo.Level++;
-                Hide();
                 CookieForm newCookieForm = new CookieForm((int)Math.Pow(10, MyInfo.Level + 1), (int)Math.Pow(10, MyInfo.Level - 1));
+                Dispose();
                 newCookieForm.ShowDialog();
             }
         }
@@ -94,8 +94,8 @@ namespace Cookie_Clicker
                 time.Text = 0 + "s remaining";
                 Timer.Enabled = false;
                 MessageBox.Show("You Lost!");
-                Hide();
                 CookieForm newCookieForm = new CookieForm((int)Math.Pow(10, MyInfo.Level), (int)Math.Pow(10, MyInfo.Level - 1));
+                Dispose();
                 newCookieForm.ShowDialog();
             }
 

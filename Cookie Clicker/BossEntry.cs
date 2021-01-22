@@ -39,7 +39,7 @@ namespace Cookie_Clicker
         private void BossOpen(object sender, EventArgs e)
         {
             BossFight fightBoss = new BossFight( _bossHp, _image);
-            Hide();
+            Dispose();
             fightBoss.ShowDialog();
         }
     }
