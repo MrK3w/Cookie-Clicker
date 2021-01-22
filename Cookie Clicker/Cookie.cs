@@ -19,7 +19,7 @@ namespace Cookie_Clicker
 
         private readonly BigInteger _monsterHealth, _rewardForKillingMonster;
 
-        
+        //Helathbar
         private readonly HealthBar _healthBar 
             = new HealthBar(new Rectangle(245, 480, 405, 44));
 
