@@ -2,22 +2,23 @@
 using System;
 using System.Configuration;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace Cookie_Clicker
 {
     public partial class BossFight : Form
     {
-        private readonly int _bossHp;
-        private string _image;
-        private int _timer = 5;
-        private int _countDps;
-        private int _remainingHealth;
+        private readonly BigInteger _bossHp;
+        private readonly string _image;
+        private int _timer = 30;
+        private BigInteger _countDps;
+        private BigInteger _remainingHealth;
 
         private readonly HealthBar _healthBar
             = new HealthBar(new Rectangle(245, 480, 405, 44));
 
-        public BossFight(int bossHp,string image)
+        public BossFight(BigInteger bossHp,string image)
         {
             InitializeComponent();
             Paint += OnPaint;
@@ -39,7 +40,7 @@ namespace Cookie_Clicker
 
             time.Text = _timer + "s remaining";
             YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(_countDps) + "\n" +
-                                   "Coins: " + MyInfo.Coins;
+                                   "Coins: " + BigIntegerFormatter.FormatWithSuffix(MyInfo.Coins);
             Refresh();
         }
 
@@ -52,7 +53,7 @@ namespace Cookie_Clicker
         /// Attack monster by specified damage.
         /// </summary>
         /// <param name="damage"> Damage which was dealt to monster. </param>
-        private void AttackMonster(int damage)
+        private void AttackMonster(BigInteger damage)
         {
             _remainingHealth -= damage;
         }
@@ -94,7 +95,7 @@ namespace Cookie_Clicker
                 Timer.Enabled = false;
                 MessageBox.Show("You Lost!");
                 Hide();
-                CookieForm newCookieForm = new CookieForm((int)Math.Pow(10, MyInfo.Level + 1), (int)Math.Pow(10, MyInfo.Level - 1));
+                CookieForm newCookieForm = new CookieForm((int)Math.Pow(10, MyInfo.Level), (int)Math.Pow(10, MyInfo.Level - 1));
                 newCookieForm.ShowDialog();
             }
 

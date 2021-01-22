@@ -18,7 +18,7 @@ namespace Cookie_Clicker
             MyUnits.InitiateDictionary("MyUnits.txt");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CookieForm((int)Math.Pow(10,MyInfo.Level+1), (int)Math.Pow(10, MyInfo.Level-1)));
+            Application.Run(new CookieForm((int)Math.Pow(10,MyInfo.Level), (int)Math.Pow(10, MyInfo.Level-1)));
         }
     }
 }

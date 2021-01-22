@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 using IdleClickerEngine;
 
@@ -9,24 +10,24 @@ namespace Cookie_Clicker
     public partial class CookieForm : Form
     {
         //Your passive dmg per second
-        private int _countDps;
+        private BigInteger _countDps;
         //instance of shop form
         private readonly ShopForm _shop;
 
         //remained hp of monster
-        private int _remainingHealth;
+        private BigInteger _remainingHealth;
 
-        private readonly int _monsterHealth, _rewardForKillingMonster;
+        private readonly BigInteger _monsterHealth, _rewardForKillingMonster;
 
         
         private readonly HealthBar _healthBar 
             = new HealthBar(new Rectangle(245, 480, 405, 44));
 
-        public CookieForm(int monsterHealth, int rewardForKillingMonster)
+        public CookieForm(BigInteger monsterHealth, BigInteger rewardForKillingMonster)
         {
             InitializeComponent();
             _shop = new ShopForm();
-            if (MyInfo.Level == 5) TheEnd();
+            if (MyInfo.Level == 6) TheEnd();
             Floor.Text = $"Floor {MyInfo.Level}";
             Text = $"Floor {MyInfo.Level}";
             _remainingHealth = monsterHealth;
@@ -69,7 +70,7 @@ namespace Cookie_Clicker
             }
 
             YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(_countDps)+"\n"+
-                          "Coins: " + MyInfo.Coins;
+                          "Coins: " + BigIntegerFormatter.FormatWithSuffix(MyInfo.Coins);
             Refresh();
         }
 
@@ -77,7 +78,7 @@ namespace Cookie_Clicker
         /// Attack monster by specified damage.
         /// </summary>
         /// <param name="damage"> Damage which was dealt to monster. </param>
-        private void AttackMonster(int damage)
+        private void AttackMonster(BigInteger damage)
         {
             _remainingHealth -= damage;
         }
@@ -158,6 +159,7 @@ namespace Cookie_Clicker
         private void button2_Click(object sender, EventArgs e)
         {
             BossEntry firstBoss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
+            Hide();
             firstBoss.ShowDialog();
         }
 

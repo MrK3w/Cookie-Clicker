@@ -1,13 +1,15 @@
-﻿namespace IdleClickerEngine
+﻿using System.Numerics;
+
+namespace IdleClickerEngine
 {
     public class Unit
     {
-        public int CountOfUnit;
+        public BigInteger CountOfUnit;
         public TypeOfUnit Type;
-        public int Price;
-        public int DamageDealt;
+        public BigInteger Price;
+        public BigInteger DamageDealt;
 
-        public Unit(int countOfUnit, TypeOfUnit type, int price, int damageDealt)
+        public Unit(BigInteger countOfUnit, TypeOfUnit type, BigInteger price, BigInteger damageDealt)
         {
             CountOfUnit = countOfUnit;
             Type = type;

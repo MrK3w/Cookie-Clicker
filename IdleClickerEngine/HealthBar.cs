@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace IdleClickerEngine
@@ -17,7 +18,7 @@ namespace IdleClickerEngine
                 return (int)(current / total * 100);
             }
 
-            public void DrawHealth(PaintEventArgs e, int remainingHealth,int monsterHealth)
+            public void DrawHealth(PaintEventArgs e, BigInteger remainingHealth, BigInteger monsterHealth)
             {
                 e.Graphics.DrawRectangle(new Pen(Brushes.Red), _progressBar);
                 e.Graphics.FillRectangle(Brushes.Red,
