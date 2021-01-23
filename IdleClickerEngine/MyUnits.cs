@@ -59,71 +59,21 @@ namespace IdleClickerEngine
             return sum;
         }
 
-        public static bool BuyBasicUnit(int count)
+        public static bool NewUnit(string unit, int count = default)
         {
-            return BuyUnit("basic unit",count);
+            return BuyUnit(unit, count);
         }
 
-        public static bool BuyBasicUnit()
-        {
-            return BuyAllUnit("basic unit");
-        }
-
-        public static bool BuyIntermediateUnit(int count)
-        {
-            return BuyUnit("intermediate unit",count);
-        }
-
-        public static bool BuyIntermediateUnit()
-        {
-            return BuyAllUnit("intermediate unit");
-        }
-
-        public static bool BuyHardUnit(int count)
-        {
-            return BuyUnit("hard unit", count);
-        }
-
-        public static bool BuyHardUnit()
-        {
-            return BuyAllUnit("hard unit");
-        }
-
-        public static bool BuyExtremeUnit(int count)
-        {
-            return BuyUnit("extreme unit", count);
-        }
-
-        public static bool BuyExtremeUnit()
-        {
-            return BuyAllUnit("extreme unit");
-        }
 
         private static bool BuyUnit(string nameOfUnit, BigInteger count)
         {
-            if (MyInfo.Coins >= UnitDictionary[nameOfUnit].Price*count)
-            {
-                UnitDictionary[nameOfUnit].CountOfUnit += count;
-                MyInfo.Coins -= UnitDictionary[nameOfUnit].Price * count;
-                return true;
-            }
+            if(count == default) count = MyInfo.Coins / UnitDictionary[nameOfUnit].Price;
+            if (MyInfo.Coins < UnitDictionary[nameOfUnit].Price * count) return false;
+            UnitDictionary[nameOfUnit].CountOfUnit += count;
+            MyInfo.Coins -= UnitDictionary[nameOfUnit].Price * count;
+            return true;
 
-            return false;
         }
-
-        private static bool BuyAllUnit(string nameOfUnit)
-        {
-            BigInteger count = MyInfo.Coins / UnitDictionary[nameOfUnit].Price;
-            if (MyInfo.Coins >= UnitDictionary[nameOfUnit].Price * count)
-            {
-                UnitDictionary[nameOfUnit].CountOfUnit += count;
-                MyInfo.Coins -= UnitDictionary[nameOfUnit].Price * count;
-                return true;
-            }
-
-            return false;
-        }
-
 
         /// <summary>
         /// Initiate dictionary from file
