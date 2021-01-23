@@ -9,13 +9,15 @@ namespace Cookie_Clicker
 {
     static class Program
     {
+        private static readonly MyUnits Units = MyUnits.GetInstance();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            MyUnits.InitiateDictionary("MyUnits.txt");
+            Units.InitiateDictionary("MyUnits.txt");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Base());

@@ -38,13 +38,14 @@ namespace Cookie_Clicker
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(277, 195);
+            this.label1.Location = new System.Drawing.Point(696, 308);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(206, 55);
+            this.label1.Size = new System.Drawing.Size(338, 91);
             this.label1.TabIndex = 0;
             this.label1.Text = "The End";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EndTimer
             // 
@@ -57,7 +58,7 @@ namespace Cookie_Clicker
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.label1);
             this.Name = "End";
             this.Text = "End";

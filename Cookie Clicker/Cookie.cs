@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 using IdleClickerEngine;
@@ -11,11 +13,11 @@ namespace Cookie_Clicker
     {
         //Your passive dmg per second
         private BigInteger _countDps;
-        //instance of shop form
-        private readonly ShopForm _shop;
 
         //remained hp of monster
         private BigInteger _remainingHealth;
+
+        private readonly MyUnits _units = MyUnits.GetInstance();
 
         private readonly BigInteger _monsterHealth, _rewardForKillingMonster;
 
@@ -26,27 +28,39 @@ namespace Cookie_Clicker
         public CookieForm(BigInteger monsterHealth, BigInteger rewardForKillingMonster)
         {
             InitializeComponent();
-            _shop = new ShopForm();
-           
-            if (MyInfo.Level == 6) TheEnd();
 
             _remainingHealth = monsterHealth;
             _rewardForKillingMonster = rewardForKillingMonster;
             _monsterHealth = monsterHealth;
 
+            InitializeFormInformations();
+
             Paint += OnPaint;
 
             RefreshValues();
-            
+            this.FormClosing += ClosedByXButton;
             LoadImage();
-
-            InitializeFormInformations();
         }
 
+
+        //Set labels for floor on form and also on label
         private void InitializeFormInformations()
         {
             Floor.Text = $"Floor {MyInfo.Level}";
             Text = $"Floor {MyInfo.Level}";
+        }
+
+        /// <summary>
+        /// Close form by clicking on x in upper bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClosedByXButton(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -60,15 +74,6 @@ namespace Cookie_Clicker
         }
 
         /// <summary>
-        /// This form is opened when you finish the game
-        /// </summary>
-        private void TheEnd()
-        {
-            End end = new End();
-            end.ShowDialog();
-        }
-
-        /// <summary>
         /// Refresh form and his values
         /// </summary>
         private void RefreshValues()
@@ -77,6 +82,8 @@ namespace Cookie_Clicker
             {
                 healthLabel.Text = $@"{_remainingHealth}/{_monsterHealth}";
             }
+
+            _countDps = _units.GetDpsOfYourUnits();
 
             YourCoinsAndDps.Text = "Your Dps: " + BigIntegerFormatter.FormatWithSuffix(_countDps)+"\n"+
                           "Coins: " + BigIntegerFormatter.FormatWithSuffix(MyInfo.Coins);
@@ -111,7 +118,6 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
-            _countDps = MyUnits.GetDpsOfYourUnits();
             AttackMonster(_countDps);
             IsMonsterStillAlive();
             RefreshValues();
@@ -124,30 +130,10 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void MyShopFormClickOpen(object sender, EventArgs e)
         {
-            _shop.ShowDialog();
+            ShopForm shop = new ShopForm();
+            shop.ShowDialog();
         }
 
-        /// <summary>
-        /// Open unit form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MyUnitFormClickOpen(object sender, EventArgs e)
-        {
-            TableOfMyUnits units = new TableOfMyUnits();
-            units.ShowDialog();
-        }
-
-        /// <summary>
-        /// Action, which is invoked when form is closed, it will save your current state to file.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Cookie_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FileWorker worker = new FileWorker("MyUnits.txt");
-            worker.SaveUnits();
-        }
 
         /// <summary>
         /// Method validate if monster is still alive, otherwise reset monster and add your reward.
@@ -172,12 +158,34 @@ namespace Cookie_Clicker
         /// <param name="e"></param>
         private void OpenBossForm(object sender, EventArgs e)
         {
-            BossEntry boss = new BossEntry(MyInfo.Level-1,(int)Math.Pow(10, MyInfo.Level+2));
+            BossEntry boss = new BossEntry((int)Math.Pow(10, MyInfo.Level+2));
             Dispose();
             boss.Show();
-            
-
         }
+
+        /// <summary>
+        /// Save your units on clicking this button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveUnits(object sender, EventArgs e)
+        {
+            FileWorker worker = new FileWorker("MyUnits.txt");
+            worker.SaveUnits();
+        }
+        
+        /// <summary>
+        /// Open form with datagrid of all yours unit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowUnits(object sender, EventArgs e)
+        {
+            TableOfMyUnits units = new TableOfMyUnits();
+            units.ShowDialog();
+        }
+
+
 
         /// <summary>
         /// Event for drawing health bar.

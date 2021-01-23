@@ -14,18 +14,25 @@ namespace Cookie_Clicker
 {
     public partial class TableOfMyUnits : Form
     {
+
+        private readonly MyUnits _units = MyUnits.GetInstance();
+
+
         public TableOfMyUnits()
         {
             InitializeComponent();
             unitView.BackgroundColor = SystemColors.Control;
-            PrepareView();
+            ShowTableOfAllUnits();
            
         }
 
-        private void PrepareView()
+        /// <summary>
+        /// Datagrid for all units
+        /// </summary>
+        private void ShowTableOfAllUnits()
         {
           
-            unitView.DataSource = (from entry in MyUnits.UnitDictionary
+            unitView.DataSource = (from entry in _units.UnitDictionary
                 orderby entry.Value.Price
                 select new { entry.Key, countOfUnit = entry.Value.CountOfUnit, damageDealt = entry.Value.DamageDealt, type = entry.Value.Type, price = entry.Value.Price }).ToList();
             unitView.Columns[0].HeaderText = "Unit name";

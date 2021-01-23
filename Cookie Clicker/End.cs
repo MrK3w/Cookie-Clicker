@@ -17,6 +17,11 @@ namespace Cookie_Clicker
             InitializeComponent();
         }
 
+        /// <summary>
+        /// End of game application will be closed after 5 seconds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EndTimer_Tick(object sender, EventArgs e)
         {
             Application.Exit();

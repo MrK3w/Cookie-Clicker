@@ -39,6 +39,7 @@ namespace Cookie_Clicker
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.ImagePanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.healthLabel = new System.Windows.Forms.Label();
             this.Floor = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -95,12 +96,13 @@ namespace Cookie_Clicker
             this.button1.TabIndex = 3;
             this.button1.Text = "SHOW UNITS";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.MyUnitFormClickOpen);
+            this.button1.Click += new System.EventHandler(this.ShowUnits);
             // 
             // ImagePanel
             // 
             this.ImagePanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Controls.Add(this.button3);
             this.ImagePanel.Controls.Add(this.button1);
             this.ImagePanel.Controls.Add(this.shopButton);
             this.ImagePanel.Controls.Add(this.YourCoinsAndDps);
@@ -110,6 +112,16 @@ namespace Cookie_Clicker
             this.ImagePanel.Size = new System.Drawing.Size(971, 511);
             this.ImagePanel.TabIndex = 0;
             this.ImagePanel.TabStop = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(648, 324);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(162, 90);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "SAVE UNITS";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.SaveUnits);
             // 
             // healthLabel
             // 
@@ -155,8 +167,7 @@ namespace Cookie_Clicker
             this.Controls.Add(this.ImagePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CookieForm";
-            this.Text = "Form1";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Cookie_FormClosed);
+            this.Text = "Form1"; 
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ImagePanel.ResumeLayout(false);
             this.ImagePanel.PerformLayout();
@@ -175,6 +186,7 @@ namespace Cookie_Clicker
         private Label healthLabel;
         private Label Floor;
         private Button button2;
+        private Button button3;
     }
 }
 

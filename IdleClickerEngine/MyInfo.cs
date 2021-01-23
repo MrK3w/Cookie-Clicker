@@ -11,9 +11,13 @@ namespace IdleClickerEngine
     {
         //Total coins you have
         public static BigInteger Coins = 1000000;
+        
         //Your click damage
         public static BigInteger ClickDamage = 1;
 
+        /// <summary>
+        /// Your current level
+        /// </summary>
         public static int Level = 1;
 
     }
